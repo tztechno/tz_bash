@@ -1,3 +1,4 @@
+https://qiita.com/Qubieeee/items/bcf0be169d3704533531
 
 [使ってるポートを調べる]
 
