@@ -1,5 +1,29 @@
 
-了解しました。`xxx.md` の `xxx` 部分が3桁の数字であるファイルを見つけて、そのファイル名を `2024-06-19-xxx.md` に変更するシェルスクリプトを作成します。
+---
+
+#!/bin/bash
+
+# 元ファイル名
+original_file="2024-06-20-xxx.md"
+
+# ファイルが存在するか確認
+if [ ! -f "$original_file" ]; then
+    echo "元ファイルが見つかりません: $original_file"
+    exit 1
+fi
+
+# 008から020までの連番でファイルをコピー
+for i in $(seq -f "%03g" 8 20); do
+    new_file=$(echo "$original_file" | sed "s/xxx/$i/")
+    cp "$original_file" "$new_file"
+    echo "作成されたファイル: $new_file"
+done
+
+echo "すべてのファイルが作成されました。"
+
+---
+
+`xxx.md` の `xxx` 部分が3桁の数字であるファイルを見つけて、そのファイル名を `2024-06-19-xxx.md` に変更するシェルスクリプトを作成します。
 
 以下はそのためのシェルスクリプトの例です：
 
@@ -57,3 +81,5 @@ chmod +x rename_files.sh
 - `echo "Renamed $file to $dir/$new_base"`: ファイル名の変更を確認します。
 
 これで、指定したディレクトリ内の3桁の数字を含む `.md` ファイルが `2024-06-19-xxx.md` に変更されます。
+
+---
