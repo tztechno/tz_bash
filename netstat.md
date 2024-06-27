@@ -1,3 +1,5 @@
+```
+
 https://qiita.com/Qubieeee/items/bcf0be169d3704533531
 
 [使ってるポートを調べる]
@@ -16,3 +18,4 @@ Usage:	netstat [-AaLlnW] [-f address_family | -p protocol]
 	netstat -r [-Aaln] [-f address_family]
 	netstat -rs [-s]
 
+```
