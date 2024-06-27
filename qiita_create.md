@@ -2,11 +2,11 @@
 
 ## はじめに
 Bashは強力で柔軟なシェルスクリプト言語で、テキスト処理、ファイル操作、システム管理タスクなど、多岐にわたる用途に適しています。
-今回は、Bashのスクリプトを用いて、ファイル編集を行い自動生成させてみます。
+今回、Bashのスクリプトを用いたファイル編集と自動生成の例を紹介します。
 
 ## 内容
-事例として、Pelicanブログのテンプレート部分の編集です。
-```
+Pelicanブログのテンプレート部分の編集を事例にあげます。
+```text
 template="Title:
 Date:
 Category: Blog
@@ -15,7 +15,7 @@ Slug:
 Authors: stpete
 Summary:
 ```
-Title,Date,Tags,Slug,Summaryに決められた情報をbash scriptで書き込んで行きます。
+Title, Date, Tags, Slug, Summary に決められた情報をbash scriptで書き込んで行きます。
 
 
 ## 実行結果例
@@ -23,7 +23,7 @@ Title,Date,Tags,Slug,Summaryに決められた情報をbash scriptで書き込�
 
 生成ファイル名称: 2024-06-27_101.md
 生成ファイル内容:
-```
+```text
 Title: Stop the war. スペイン語
 Date: 2024-06-27
 Category: Blog
@@ -33,8 +33,8 @@ Authors: stpete
 Summary: Stop the war.
 ```
 
-## bash script(create_files.sh)の内容
-```
+## bash script(create.sh)の内容
+```bash
 #!/bin/bash
 
 # 日付を取得
@@ -121,15 +121,13 @@ done
 IFS は "Internal Field Separator" の略で、Bashシェルにおいて重要な環境変数です。
 IFS= と設定することで、一時的にIFSを空に設定した上で、read コマンドにより行全体を1つの単位として読み込み保持します。
 
-
-
 ## 実行方法
-```
-bash create_files.sh
+```bash
+bash create.sh
 ```
 
 ## 終わりに
-この内容は、以下の各種機能を含んでおり、必要に応じて内容を書き換えることで、いろいろな場面で使えるか思います。
+上記のスクリプトはbashの各種機能を含んでおり、必要に応じて書き換えることで、いろいろな場面で使えるか思います。
 
 * 基本的な構造: ループ構造や条件分岐を使用。
 * 配列の使用: 複数の配列（langs, texts, kws）を使用。
