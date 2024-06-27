@@ -7,17 +7,23 @@
 current_date=$(date +%Y-%m-%d)
 
 # 数字範囲の指定
-start=96
-end=100
+start=101
+end=104
+
+# 言語の配列を定義
+langs=("スペイン語" "イタリア語" "フランス語" "ドイツ語")
+texts=("Stop using drugs.")
+kws=("drug")
 
 # テンプレート内容
-template="Title: xxx. xxx語
+template="Title:
 Date:
 Category: Blog
 Tags:
 Slug:
 Authors: stpete
-Summary:"
+Summary:
+"
 
 # 指定範囲の数字に対してファイルを作成または編集
 for number in $(seq $start $end); do
@@ -27,6 +33,14 @@ for number in $(seq $start $end); do
     # ファイル名を作成
     file_name="${current_date}-${zfilled_number}.md"
     
+    # 言語のインデックスを計算（0から始まるため-1する）
+    lang_index=$((number - start))
+    current_lang="${langs[$lang_index]}"
+    
+    # texts配列から要素を取得（配列が1つの要素しか持たない場合は常に最初の要素を使用）
+    current_text="${texts[0]}"
+    current_kw="${kws[0]}"
+
     # ファイルが存在しない場合、テンプレートを追加
     if [ ! -f "$file_name" ]; then
         echo "$template" > "$file_name"
@@ -44,13 +58,16 @@ for number in $(seq $start $end); do
             "Slug:")
                 echo "Slug: ${zfilled_number}" >> "$tmp_file"
                 ;;
-            "Summary:")
-                echo "Summary: Stop using drugs." >> "$tmp_file"
-                ;;
             "Tags:")
-                echo "Tags: drug, " >> "$tmp_file"
-                ;;                
-             *)
+                echo "Tags: ${current_kw}, ${current_lang}" >> "$tmp_file"
+                ;;
+            "Title:")
+                echo "Title: ${current_text} ${current_lang}" >> "$tmp_file"
+                ;;
+            "Summary:")
+                echo "Summary: ${current_text}" >> "$tmp_file"
+                ;;
+            *)
                 echo "$line" >> "$tmp_file"
                 ;;
         esac
@@ -64,7 +81,7 @@ for number in $(seq $start $end); do
     fi
 
     # 確認メッセージ
-    echo "ファイル '${file_name}' が作成されました。"
+    echo "ファイル '${file_name}' が作成または編集されました。"
 done
 ```
 ---
