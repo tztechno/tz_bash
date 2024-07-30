@@ -30,12 +30,10 @@ for filename in os.listdir(directory):
             shutil.move(filepath, new_filepath)
             
             # 2行目をチェックし、変更前ファイル名が含まれていれば置き換える
-            temp_file_path = os.path.join(directory, "tempfile")
-            
             with fileinput.FileInput(new_filepath, inplace=True, backup=".bak") as file:
                 for i, line in enumerate(file):
-                    if i == 1 and old_base_name in line:
-                        line = line.replace(old_base_name, new_base_name)
+                    if i == 1 and base_name in line:  # base_name 変数を使用する
+                        line = line.replace(base_name, new_base_name)
                     print(line, end="")
             
             # バックアップファイルを削除
